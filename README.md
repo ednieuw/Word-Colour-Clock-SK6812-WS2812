@@ -38,7 +38,7 @@ WHEELCOLOR    = 5; Every second another colour of rainbow
 DIGITAL       = 6; Digital display
 ************************************************************************************
  Author .: Ed Nieuwenhuys
- Changes.: 0.24 Built in Clock Michelle en JoDi klok. 
+ 
  Changes.: 0.25 0.26 Optimised and ready for SK6812 RGBW
  Changes.: 0.27 Colour changes per minute. New Function HSVtoRGB
  Changes.: 0.28b 144 LED EJN_SK6821 clock with Digits in display BLUETOOTH not possible bug with Softwareserial & Adafruit_neopixel. connect BT to pin 0 & 1
