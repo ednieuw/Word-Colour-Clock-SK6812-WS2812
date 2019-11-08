@@ -21,19 +21,33 @@ The DCF77 module can be attached to adjust the time to the second with German lo
 Arduino Uno, Nano with SK6812 LEDs: Program size must stay below approx 23572, 1129 bytes bytes with 144 LEDs.
 ************************************************************************************
 To set the time with the rotary button:
+
 One press on rotary: UUR is flashing -> turn to set hour
+
 Second press on rotary: HT IS WAS flashes --> turn to set minute
-the following presses are various display modes with the DIGITAL choice as second last 
+
+the following presses are various display modes with the DIGITAL choice as second last
+
 Last press on rotary: many letters turns on --> turn to set intensity level of the LEDs
+
 Press again of wait for one minute to return to normal operation
+
 Displaymodes (Qn):
-DEFAULTCOLOUR = 0; Yellow text.  HET Green to Red hour IS WAS Green to Red Minute  
-HOURLYCOLOUR  = 1; Every hour other colour text. HET Green to Red hour IS WAS Green to Red Minute         
+
+DEFAULTCOLOUR = 0; Yellow text.  HET Green to Red hour IS WAS Green to Red Minute
+
+HOURLYCOLOUR  = 1; Every hour other colour text. HET Green to Red hour IS WAS Green to Red Minute
+
 WHITECOLOR    = 2; All white text
+
 OWNCOLOUR     = 3; All own colour
+
 OWNHETISCLR   = 4; All own colour. HET Green to Red hour IS WAS Green to Red Minute
+
 WHEELCOLOR    = 5; Every second another colour of rainbow
+
 DIGITAL       = 6; Digital display
+
 ************************************************************************************
  Author .: Ed Nieuwenhuys
  
