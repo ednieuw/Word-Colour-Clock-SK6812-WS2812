@@ -18,7 +18,6 @@ Arduino SAMD for MKR1010
 
 The HC05 or HM-10 Bluetooth module is used to read and write information or instructions to the clock
 The DCF77 module can be attached to adjust the time to the second with German longwave time signal received by the module
-The FM-module can be used to read the RDS-time from radio station or to play FM-radio station from within the clock
 
 Arduino Uno, Nano with SK6812 LEDs: Program size must stay below approx 23572, 1129 bytes bytes with 144 LEDs.
 ************************************************************************************
@@ -434,7 +433,7 @@ bool    ZegUur               = true;    // Say or not Uur in NL clock
 #define DS3231_I2C_ADDRESS          0x68
 #define DS3231_TEMPERATURE_MSB      0x11
 #define DS3231_TEMPERATURE_LSB      0x12
-RTC_DS3231 rtc; //RTC_DS3231 RTC;    //RTC_DS1307 RTC;   
+RTC_DS3231 RTC; //RTC_DS3231 RTC;    //RTC_DS1307 RTC;   
 DateTime Inow;
 
 //--------------------------------------------
@@ -456,7 +455,7 @@ time_t tijd;
                     #ifdef DCFMOD 
                     #if defined(__AVR_ATmega328P__) 
 #define DCF_INTERRUPT 0             // DCF Interrupt number associated with DCF_PIN
-#endif
+                    #endif
                     #ifdef ATmega644_1284
 #define DCF_INTERRUPT 2             // DCF Interrupt number associated with DCF_PIN
                     #endif
@@ -573,7 +572,7 @@ void setup()
  DCF.Start();                                                       // Start the DCF-module
  Tekstprintln("DCF enabled");
                           #endif DCFMOD
- rtc.begin();                                                       // Start the rtc-module  
+ RTC.begin();                                                       // Start the rtc-module  
                           #ifdef LCDMOD
  lcd.begin (16,2); // for 16 x 2 LCD module                         // Activate LCD module
  lcd.setBacklightPin(3,POSITIVE);
@@ -584,12 +583,12 @@ void setup()
  Setup_MKRWIFI1010();                                               // Start the MKR1010
  Tekstprintln("MKR-1010 WIFI enabled");
                           #endif ARDUINO_SAMD_MKRWIFI1010
- DateTime now = rtc.now();
+ DateTime now = RTC.now();
  DateTime compiled = DateTime(__DATE__, __TIME__);
  if (now.unixtime() < compiled.unixtime()) 
   {
    Serial.println(F("RTC is older than compile time! Updating"));   // Following line sets the RTC to the date & time this sketch was compiled
-   rtc.adjust(DateTime(F(__DATE__), F(__TIME__))); 
+   RTC.adjust(DateTime(F(__DATE__), F(__TIME__))); 
   }
  if (EEPROMread(0) <3 || EEPROMread(0) > 200)  EEPROMwrite(0, LightReducer);     // Default intensity for this clock
  if (EEPROMread(1) <1 || EEPROMread(1) > 100)  EEPROMwrite(1, LowerBrightness);  // Default Lower Brightness for this clock
@@ -997,7 +996,7 @@ void Displaytime(void)
 //--------------------------------------------
 void GetTijd(byte printit)
 {
- Inow =    rtc.now();
+ Inow =    RTC.now();
  Ihour =   Inow.hour();
  Iminute = Inow.minute();
  Isecond = Inow.second();
@@ -1044,7 +1043,7 @@ void SetRTCTime(void)
  Ihour   = constrain(Ihour  , 0,24);
  Iminute = constrain(Iminute, 0,59); 
  Isecond = constrain(Isecond, 0,59); 
- rtc.adjust(DateTime(Inow.year(), Inow.month(), Inow.day(), Ihour, Iminute, Isecond));
+ RTC.adjust(DateTime(Inow.year(), Inow.month(), Inow.day(), Ihour, Iminute, Isecond));
  GetTijd(0);                                      // synchronize time with RTC clock
  Displaytime();
  Print_tijd();
@@ -1363,7 +1362,7 @@ void WhiteOverRainbow(uint8_t wait, uint8_t whiteSpeed, uint8_t whiteLength )
 //--------------------------------------------
 void Zet_Pixel(byte Cijfer,byte Pos_X, byte Pos_Y) 
 { 
- int      LEDnum;
+ uint32_t LEDnum;
  uint32_t OrgColor;
  CheckColourStatus();
  for(int i=0;i<3;i++)
@@ -1406,7 +1405,7 @@ void WriteLightReducer(float amount)
 void WriteLightReducerEeprom(byte waarde)
 {
  LightReducer = constrain (waarde, 0 , 255);  // May not be larger than 255
- EEPROMwrite(0, LightReducer);              // Store the value (0-250) in permanent EEPROM memory at address 0
+ EEPROMwrite(0, LightReducer);                // Store the value (0-250) in permanent EEPROM memory at address 0
  sprintf(sptext,"Max brightness: %3d%%",LightReducer);
  Tekstprintln(sptext);
 // Serial.print(millis() - RotaryPressTimer); Serial.print(" msec ------- ");
@@ -1436,8 +1435,8 @@ byte EEPROMread(byte pos)
 //--------------------------------------------
 void WriteLowerBrightness(byte waarde)
 {
- LowerBrightness = constrain (waarde, 0 , 150);                    // Range between 1 and 100
- EEPROMwrite(1, LowerBrightness);                                    // Default Lower Brightness for this clock
+ LowerBrightness = constrain (waarde, 0 , 150);      // Range between 1 and 100
+ EEPROMwrite(1, LowerBrightness);                    // Default Lower Brightness for this clock
  sprintf(sptext,"Lower brightness: %3ld bits",(long) LowerBrightness);
  Tekstprintln(sptext);
 }
@@ -1453,7 +1452,7 @@ void ReworkInputString(String InputString)
  byte  Intensityfactor;
  InputString.toCharArray(sptext, MAXTEXT-1);
 
- if (  InputString[0] > 64 && InputString[0] <123 )                                           // Does the string start with a letter?
+ if (  InputString[0] > 64 && InputString[0] <123 )   // Does the string start with a letter?
   { 
   Tekstprintln(sptext);
   switch ((byte)InputString[0])
@@ -1480,7 +1479,7 @@ void ReworkInputString(String InputString)
               Iday   = constrain(Iday  , 0, 31);
               Imonth = constrain(Imonth, 0, 12); 
               Jaar   = constrain(Jaar , 1000, 9999); 
-              rtc.adjust(DateTime(Jaar, Imonth, Iday, Inow.hour(), Inow.minute(), Inow.second()));
+              RTC.adjust(DateTime(Jaar, Imonth, Iday, Inow.hour(), Inow.minute(), Inow.second()));
               sprintf(sptext,"%0.2d:%0.2d:%0.2d %0.2d-%0.2d-%0.4d",Inow.hour(),Inow.minute(),Inow.second(),Iday,Imonth,Jaar);
               Tekstprintln(sptext);
              }
