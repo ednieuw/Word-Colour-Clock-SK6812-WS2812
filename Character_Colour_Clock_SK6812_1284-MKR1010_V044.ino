@@ -8,7 +8,6 @@ This source contains code for the following modules:
 - Bluetooth RF Transceiver Module HC05 and HM10 BLE
 - DCF77 module DCF-2
 - LCD
-- FM-radio
 - WIFI on MKR 1010 to get NTP time
 
 Load and install in IDE:
@@ -68,17 +67,12 @@ DIGITAL       = 6; Digital display
 //--------------------------------------------
 // ARDUINO Definition of installed modules
 //--------------------------------------------
-//#define BWClock      // Defines Black and White Word Clock with 2835 / 2538 LEDs 
-//--------->>             If ColourClock is defined also choose between LED type
-#define ColourClock    // Defines colour Word Clock with WS2812 LEDs
 //#define LED2812
-#define LED6812
-
-//#define FMRADIOMOD    // in development time retrieval works. Needs automatic optimal sender search function
-//#define BLUETOOTHMOD   // Kan niet uit bij ATMEGA1280 boards?
-//#define DCFMOD
+#define LED6812         // choose between LED type RGB=LED2812 or RGBW=LED6812
 #define ROTARYMOD
-//#define LCDMOD
+#define BLUETOOTHMOD  // Use  this define if Bluetooth needs other pins than pin 0 and pin 1
+#define DCFMOD
+#define LCDMOD
 //--------------------------------------------
 // ARDUINO Definition of installed language word clock
 //--------------------------------------------
@@ -90,12 +84,12 @@ DIGITAL       = 6; Digital display
 // ARDUINO Includes defines and initialisations
 //--------------------------------------------
                      #if defined(__AVR_ATmega644P__) || defined(__AVR_ATmega644__) || defined(__AVR_ATmega1284P__) || defined(__AVR_ATmega1284__)
-#define ATmega644_1284   
+#define ATmega644_1284   // Make this #ifdef easier to read
                      #endif
 #include <Wire.h>
 #include "RTClib.h"
 #include "TimeLib.h"
-#include <SoftwareSerial.h>   // moet hier staan. geen idee waarom
+                                   //#include <SoftwareSerial.h>   // moet hier staan. geen idee waarom
 #include <avr/pgmspace.h>
                      #if defined(ARDUINO_SAMD_MKRWIFI1010)
 #include <FlashAsEEPROM.h>
@@ -116,12 +110,11 @@ DIGITAL       = 6; Digital display
                      #ifdef BLUETOOTHMOD
 #include <SoftwareSerial.h>     // for Bluetooth communication
                      #endif BLUETOOTHMOD
-                     #endif 
-
+                     #endif ATmega644_1284
                      #ifdef ROTARYMOD
 #include <Encoder.h>
                      #ifdef ATmega644_1284
-  #define CORE_NUM_INTERRUPT 3
+  #define CORE_NUM_INTERRUPT 3               // use other interupt voor these chipsetsa
   #define CORE_INT0_PIN   10
   #define CORE_INT1_PIN   11
   #define CORE_INT2_PIN   2
@@ -309,8 +302,8 @@ enum DigitalPinAssignments {      // Digital hardware constants ATMEGA 1284P ---
  PIN06        = 6,                // PIN 6         PB6 PWM  
  HeartbeatLED = 7,                // PIN 7         PB7 PWM 
  RX1          = 8,                // RX1           PD0 digital
- TX1          = 9,               // TX1           PD1 digital
- DCF_LED_Pin  = 10,                // LED10         PD2 digital
+ TX1          = 9,                // TX1           PD1 digital
+ DCF_LED_Pin  = 10,               // LED10         PD2 digital
  encoderPinB  = 11,               // left (labeled CLK on decoder)no interrupt pin
  encoderPinA  = 12,               // right (labeled DT on decoder)on interrupt  pin
  clearButton  = 13,               // switch (labeled SW on decoder)  
@@ -335,43 +328,30 @@ enum AnaloguePinAssignments {     // Analogue hardware constants ----
   EmptyA5     = 29,               // Empty
   EmptyA6     = 30};              // Empty
                      #endif ATmega644_1284
-/*                                         
-enum DigitalPinAssignments {      // Digital hardware constants ATMEGA 1284P ----
- BT_RX        = 0,                // Bluetooth RX Connects to Bluetooth TX
- BT_TX        = 1,                // Bluetooth TX Connects to Bluetooth RX
- DCF_PIN      = 2,                // DCFPulse on interrupt  pin
- PWMpin       = 3,                // Pin that controle PWM signal on BC327 transistor to dim light
- PIN04        = 4,                // Pin 4         PB4 PWM
- LED_PIN      = 5,                // Pin to control colour 2811/2812 leds PB5 digital
- PIN06        = 6,                // PIN 6         PB6 PWM 
- PIN07        = 7,                // PIN 7         PB7 PWM  
- PIN08        = 8,                // RX1           PD0 digital
- PIN09        = 9,                // TX1           PD1 digital
- LED10        = 10,               // LED10         PD2 digital
- encoderPinB  = 11,               // left (labeled CLK on decoder)no interrupt pin
- encoderPinA  = 12,               // right (labeled DT on decoder)on interrupt  pin
- clearButton  = 13,               // switch (labeled SW on decoder)  
- DCF_LED_Pin  = 14,               // define pin voor AM PM Led
- HeartbeatLED = 15,               // LED15         PD7 PWM
- SCL_pin      = 16,               // SCL pin       PC0 interrupt
- SDA_pin      = 17,               // SDA pin       PC1 interrupt
- PIN18        = 18,               // Empty         PC2 digital
- LED19        = 19,               // LED19         PC3 digital
- LEDDataPin   = 20,               // blauw HC595
- LEDStrobePin = 21,               // groen HC595
- LEDClockPin  = 22,               // geel  HC595
- secondsPin   = 23};
-                                  
-enum AnaloguePinAssignments {     // Analogue hardware constants ----
-  EmptyA0     = 24,               // Empty
-  EmptyA1     = 25,               // Empty
-  PhotoCellPin= 26,               // LDR pin  AI 2
-  EmptyA3     = 27,               // Empty
-  EmptyA4     = 28,               // Empty
-  EmptyA5     = 29,               // Empty
-  EmptyA6     = 30};              // Empty
- #endif 
-*/
+
+//--------------------------------------------
+// COLOURS
+//--------------------------------------------   
+
+const byte DEFAULTCOLOUR = 0;
+const byte HOURLYCOLOUR  = 1;          
+const byte WHITECOLOR    = 2;
+const byte OWNCOLOUR     = 3;
+const byte OWNHETISCLR   = 4;
+const byte WHEELCOLOR    = 5;
+const byte DIGITAL       = 6;
+byte DisplayChoice       = WHITECOLOR;                // Default colour for clock
+byte ResetDisplayChoice  = DisplayChoice; 
+                         #ifdef LED2812
+const uint32_t white     = 0x00FFFFFF;                   // white is R, G and B on WS2812                
+                         #endif LED2812
+                         #ifdef LED6812    
+const uint32_t white     = 0xFF000000;                   // The SK6812 LED has a white LED that is pure white
+                         #endif LED6812  
+const uint32_t black  = 0x000000, red   = 0xFF0000, orange = 0xFF7000;
+const uint32_t yellow = 0xFFFF00, apple = 0x80FF00, brown  = 0x503000;
+const uint32_t green  = 0x00FF00, grass = 0x00FF80, sky    = 0x00FFFF;
+const uint32_t marine = 0x0080FF, blue  = 0x0000FF, pink   = 0xFF0080, purple = 0xFF00FF;
 //--------------------------------------------
 // LED
 //--------------------------------------------
@@ -394,7 +374,7 @@ uint32_t DefaultColor  = 0X00FFDD00;       // Yellow
 uint32_t OwnColour     = 0X002345DD;       // Blue
 uint32_t WhiteColour   = 0XFF000000;
 uint32_t WheelColor    = 0X000000FF;
-uint32_t HourColor[24] ={0XFFFFFF,0X800080,0XFFD500,0X00B8FF,0XFF6200,0X80FF00,
+uint32_t HourColor[24] ={white   ,0X800080,0XFFD500,0X00B8FF,0XFF6200,0X80FF00,
                          0XFF8000,0X00C8FF,0X7500BC,0XFFD000,0X00FF00,0XFF0050,
                          0XFF0000,0XFFFF00,0XFF4000,0XFF0088,0XF7FF00,0XFF00BF,
                          0X00FF00,0X00F2A0,0X6FFF00,0X0073FF,0X70ff70,0X0000FF };     
@@ -410,8 +390,7 @@ const byte PROGMEM Getal[10][3][5]  = {
                      { {1, 1, 0, 0, 0}, {1, 0, 0, 0, 0}, {1, 1, 1, 1, 1} },  //7
                      { {1, 1, 1, 1, 1}, {1, 0, 1, 0, 1}, {1, 1, 1, 1, 1} },  //8
                      { {1, 1, 1, 0, 1}, {1, 0, 1, 0, 1}, {1, 1, 1, 1, 1} }   //9
-                     };  
-      
+                     };        
 //--------------------------------------------
 // KY-040 ROTARY
 //-------------------------------------------- 
@@ -511,18 +490,7 @@ int  MilliSecondValue     = 1000;       // The duration of a second  minus 1 ms.
 static uint32_t last_time = 0;          // Heartbeat defines
 byte hbval                = 128;        // Heartbeat initial intensity
 byte hbdelta              = 10;         // Determines how fast heartbeat is
-//--------------------------------------------
-// COLOURS
-//--------------------------------------------   
-const byte DEFAULTCOLOUR = 0;
-const byte HOURLYCOLOUR  = 1;          
-const byte WHITECOLOR    = 2;
-const byte OWNCOLOUR     = 3;
-const byte OWNHETISCLR   = 4;
-const byte WHEELCOLOR    = 5;
-const byte DIGITAL       = 6;
-byte DisplayChoice = WHITECOLOR;       
-byte ResetDisplayChoice = WHITECOLOR; 
+
 //--------------------------------------------
 // Menu
 //--------------------------------------------  
@@ -558,9 +526,6 @@ else
                               #endif
   EverySecondCheck();  
   EveryMinuteUpdate();
-                              #ifdef FMRADIOMOD     
-  FMradioCheck();  
-                              #endif FMRADIOMOD
                               #ifdef BLUETOOTHMOD   
   BluetoothCheck(); 
                               #endif BLUETOOTHMOD
@@ -604,10 +569,6 @@ void setup()
  strip.setBrightness(BRIGHTNESS); //BRIGHTNESS);
  ShowLeds();                                                        // Initialize all pixels to 'off' 
  Tekstprintln("LED strip enabled");
-                          #ifdef FMRADIOMOD 
- Setup_FMradio();                                                   // Start the FM-radio
- Tekstprintln("FM-radio enabled");
-                          #endif FMRADIOMOD 
                           #ifdef DCFMOD
  DCF.Start();                                                       // Start the DCF-module
  Tekstprintln("DCF enabled");
@@ -903,14 +864,10 @@ void RotaryEncoderCheck(void)
         if (ChangeTime) 
           {
            if (NoofRotaryPressed == 1)                              // Change hours
-              {
-               if( ++Ihour >23) { Ihour = 0; }
-              }      
+              { if( ++Ihour >23) { Ihour = 0; } }      
            if (NoofRotaryPressed == 2)                              // Change minutes
-              { 
-               Isecond = 0;
-               if( ++Iminute >59) { Iminute = 0; if( ++Ihour >23) { Ihour = 0; } }   
-              }
+              {  Isecond = 0;
+               if( ++Iminute >59) { Iminute = 0; if( ++Ihour >23) { Ihour = 0; } }  }
            } 
         }    
       if (encoderPos <0)                                            // Increase the HOURS
@@ -919,14 +876,10 @@ void RotaryEncoderCheck(void)
        if (ChangeTime)     
           {
            if (NoofRotaryPressed == 1)                              // Change hours
-            {
-             if( Ihour-- ==0) { Ihour = 23; }
-            }      
+            { if( Ihour-- ==0) { Ihour = 23; } }      
            if (NoofRotaryPressed == 2)                              // Change minutes
-            { 
-             Isecond = 0;
-             if( Iminute-- == 0) { Iminute = 59; if( Ihour-- == 0) { Ihour = 23; } }   
-            }
+            { Isecond = 0;
+             if( Iminute-- == 0) { Iminute = 59; if( Ihour-- == 0) { Ihour = 23; } }  }
           }          
         } 
       SetRTCTime();  
@@ -1164,13 +1117,8 @@ void ShowLeds(void)
 //--------------------------------------------  
 void SetBrightnessLeds( byte Bright)
 {
-                                       #ifdef BWClock
- analogWrite(PWMpin, Bright);     // write PWM                  
-                                       #endif BWClock
-                                       #ifdef ColourClock 
  strip.setBrightness(Bright); 
  ShowLeds();
-                                        #endif ColourClock 
 }
 
 //--------------------------------------------
@@ -1213,20 +1161,20 @@ uint32_t FuncCRGBW( uint32_t Red, uint32_t Green, uint32_t Blue, uint32_t White)
 //--------------------------------------------
 //  LED functions to extract RGBW colors
 //-------------------------------------------- 
- uint8_t white(uint32_t c) { return (c >> 24);}
- uint8_t red(  uint32_t c) { return (c >> 16);}
- uint8_t green(uint32_t c) { return (c >> 8); }
- uint8_t blue( uint32_t c) { return (c);      }
+ uint8_t Cwhite(uint32_t c) { return (c >> 24);}
+ uint8_t Cred(  uint32_t c) { return (c >> 16);}
+ uint8_t Cgreen(uint32_t c) { return (c >> 8); }
+ uint8_t Cblue( uint32_t c) { return (c);      }
 
 //--------------------------------------------
 //  LED Store RGBW colors in EEPROM 
 //-------------------------------------------- 
 void StoreEEPROM_RGBW(uint32_t RGBWvalue)
 {
- EEPROMwrite(4, red(  RGBWvalue));
- EEPROMwrite(5, green(RGBWvalue));
- EEPROMwrite(6, blue( RGBWvalue));
- EEPROMwrite(7, white(RGBWvalue));
+ EEPROMwrite(4, Cred(  RGBWvalue));
+ EEPROMwrite(5, Cgreen(RGBWvalue));
+ EEPROMwrite(6, Cblue( RGBWvalue));
+ EEPROMwrite(7, Cwhite(RGBWvalue));
 }
 //--------------------------------------------
 //  LED Retrieve RGBW colors from EEPROM
@@ -1335,7 +1283,7 @@ void Play_Lights()
 {
 //  for (int n=0; n<12; n++)   { for (int i=0; i<NUM_LEDS; i++) { ColorLeds("",i,i,HourColor[n]); ShowLeds(); } }
 //  WhiteOverRainbow(50, 50, 5 );
-  WhiteOverRainbow(5, 5, 5 );
+  WhiteOverRainbow(5, 5, 5 );  // wait, whiteSpeed, whiteLength
   LedsOff();
 }
 
@@ -1344,7 +1292,6 @@ void Play_Lights()
 //  Input a value 0 to 255 to get a color value.
 //  The colours are a transition r - g - b - back to r.
 //--------------------------------------------
-
 uint32_t Wheel(byte WheelPos) 
 {
  WheelPos = 255 - WheelPos;
@@ -1356,8 +1303,8 @@ uint32_t Wheel(byte WheelPos)
 
 //--------------------------------------------
 //  LED RainbowCycle
-//--------------------------------------------
 // Slightly different, this makes the rainbow equally distributed throughout
+//--------------------------------------------
 void RainbowCycle(uint8_t wait) 
 {
   uint16_t i, j;
@@ -1411,13 +1358,13 @@ void WhiteOverRainbow(uint8_t wait, uint8_t whiteSpeed, uint8_t whiteLength )
 
 //--------------------------------------------
 //  LED Place digits 0 - 9 in Matrix display
+// First row and column = 0, PosX,PosY is left top position of 3x5 digit
+// Calculate position LED #define MATRIX_WIDTH 12 #define MATRIX_HEIGHT 12
 //--------------------------------------------
 void Zet_Pixel(byte Cijfer,byte Pos_X, byte Pos_Y) 
-{                                   // first row and column = 0, PosX,PoY is left top position of 3x5 digit
-                                    // Bereken positie LED #define MATRIX_WIDTH 12 #define MATRIX_HEIGHT 12
- int     LEDnum;
+{ 
+ int      LEDnum;
  uint32_t OrgColor;
-
  CheckColourStatus();
  for(int i=0;i<3;i++)
   {  
@@ -1425,8 +1372,7 @@ void Zet_Pixel(byte Cijfer,byte Pos_X, byte Pos_Y)
    {
     int c = pgm_read_byte_near ( &Getal[Cijfer][i][j]); 
     if ( c )          // if Digit == 1 then turn that light on
-     {
-     //     Serial.print(strip.getPixelColor(LEDnum) & 0X00FFFFFF,HEX); Serial.print(" ");
+     {                // Serial.print(strip.getPixelColor(LEDnum) & 0X00FFFFFF,HEX); Serial.print(" ");
       if((Pos_Y+j)%2) LEDnum = ((MATRIX_WIDTH -1) - (Pos_X + i) + (Pos_Y + j) * (MATRIX_HEIGHT));
       else            LEDnum =                      (Pos_X + i) + (Pos_Y + j) * (MATRIX_HEIGHT); 
       strip.getPixelColor(LEDnum) && white ? OrgColor = LetterColor : OrgColor = 0;
@@ -1436,14 +1382,13 @@ void Zet_Pixel(byte Cijfer,byte Pos_X, byte Pos_Y)
    }
  }
 }
-
 //--------------------------------------------
 //  LED Time in for digits in display
 //--------------------------------------------
 void TimePlaceDigit(byte uur, byte minuut)
 {   
-  Zet_Pixel(    uur / 10, 2, 1);  Zet_Pixel(    uur % 10, 7, 1);
-  Zet_Pixel( minuut / 10, 2, 7);  Zet_Pixel( minuut % 10, 7, 7);
+ Zet_Pixel(    uur / 10, 2, 1);  Zet_Pixel(    uur % 10, 7, 1);
+ Zet_Pixel( minuut / 10, 2, 7);  Zet_Pixel( minuut % 10, 7, 7);
 }
 
 //--------------------------------------------
@@ -1695,7 +1640,6 @@ uint32_t HexToDec(String hexString)
   }
 return decValue;
 }
-
 
 //--------------------------------------------
 //  CLOCK Dutch clock display
