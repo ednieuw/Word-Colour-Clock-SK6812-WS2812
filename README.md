@@ -7,7 +7,6 @@ This source contains code for the following modules:
 - Bluetooth RF Transceiver Module HC05 and HM10 BLE
 - DCF77 module DCF-2
 - LCD
-- FM-radio
 - WIFI on MKR 1010 to get NTP time
 
 Load and install in IDE:
@@ -18,7 +17,6 @@ Arduino SAMD for MKR1010
 
 The HC05 or HM-10 Bluetooth module is used to read and write information or instructions to the clock
 The DCF77 module can be attached to adjust the time to the second with German longwave time signal received by the module
-The FM-module can be used to read the RDS-time from radio station or to play FM-radio station from within the clock
 
 Arduino Uno, Nano with SK6812 LEDs: Program size must stay below approx 23572, 1129 bytes bytes with 144 LEDs.
 ************************************************************************************
