@@ -15,7 +15,8 @@ https://mcudude.github.io/MightyCore/package_MCUdude_MightyCore_index.json ATMEG
 https://raw.githubusercontent.com/damellis/attiny/ide-1.6.x-boards-manager/package_damellis_attiny_index.json ATTINY
 Arduino SAMD for MKR1010
 
-The HC05 or HM-10 Bluetooth module is used to read and write information or instructions to the clock
+The HC05 or HM-10 Bluetooth module is used to read and write information or instructions to the clock.
+
 The DCF77 module can be attached to adjust the time to the second with German longwave time signal received by the module
 
 Arduino Uno, Nano with SK6812 LEDs: Program size must stay below approx 23572, 1129 bytes bytes with 144 LEDs.
