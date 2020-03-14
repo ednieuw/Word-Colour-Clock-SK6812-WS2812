@@ -1,4 +1,4 @@
-# Character_Colour_Clock_SK6812_1284-MKR1010_V044
+# Character_Colour_Clock_SK6812_1284-MKR1010
 This Arduino code controls the ATMEGA328 (Nano) ATMEGA1284 chip and Arduino MKR1010 that controls the LED strips of the Word Clock
 This source contains code for the following modules:  
 - RTC DS3231 ZS-042 clock module
@@ -15,40 +15,28 @@ https://mcudude.github.io/MightyCore/package_MCUdude_MightyCore_index.json ATMEG
 https://raw.githubusercontent.com/damellis/attiny/ide-1.6.x-boards-manager/package_damellis_attiny_index.json ATTINY
 Arduino SAMD for MKR1010
 
-The HC05 or HM-10 Bluetooth module is used to read and write information or instructions to the clock.
-
-The DCF77 module can be attached to adjust the time to the second with German longwave time signal received by the module
-
-Arduino Uno, Nano with SK6812 LEDs: Program size must stay below approx 23572, 1129 bytes bytes with 144 LEDs.
-************************************************************************************
-To set the time with the rotary button:
-
-One press on rotary: UUR is flashing -> turn to set hour
-
-Second press on rotary: HT IS WAS flashes --> turn to set minute
-
-the following presses are various display modes with the DIGITAL choice as second last
-
-Last press on rotary: many letters turns on --> turn to set intensity level of the LEDs
-
-Press again of wait for one minute to return to normal operation
-
-Displaymodes (Qn):
-
-DEFAULTCOLOUR = 0; Yellow text.  HET Green to Red hour IS WAS Green to Red Minute
-
-HOURLYCOLOUR  = 1; Every hour other colour text. HET Green to Red hour IS WAS Green to Red Minute
-
-WHITECOLOR    = 2; All white text
-
-OWNCOLOUR     = 3; All own colour
-
-OWNHETISCLR   = 4; All own colour. HET Green to Red hour IS WAS Green to Red Minute
-
-WHEELCOLOR    = 5; Every second another colour of rainbow
-
-DIGITAL       = 6; Digital display
-
+<p>This word clock program is suitable and tested for use with Arduino UNO, Nano, Nano Every, ATMEGA, ATMEGA1284 chip, Arduino MKR 1010. <br>
+  Other Arduino variant probably also work.<br>
+  The HC05 or HM-10 Bluetooth module is used to read and write information or instructions to the clock. <br>
+  With a rotary encoder time and several display modes can also be changed.<br>
+  The DCF77 module can be attached to adjust the time to the second with German longwave time signal received by the module Arduino Uno, Nano with WS2812 or SK6812 LEDs: <br>
+Program size must stay below approx 23572 bytes  when 144 LEDs are used. Due to a Adafruit Neopixel bug the usage of memory by the LEDs is not subtracted from the avaiable memory. <br>
+With the Nano Every, Mega or chips with larger memory program size is no issue.<br>
+In an Arduino MKR1010 Wifi can be used to receive the time from a timeserver<br>
+  <br>
+  To set the time with the rotary button: <br>
+  One press on rotary: UUR is flashing -&gt; turn to set hour.<br>
+  Second press on rotary: HET IS WAS flashes --&gt; turn to set minute the following presses are various display modes with the DIGITAL choice as second last.<br>
+  Last press on rotary: many letters turns on --&gt; turn to set intensity level of the LEDs Press again of wait for one minute to return to normal operation.<br>
+  Displaymodes (Qn): <br>
+  DEFAULTCOLOUR = 0; 
+Yellow text. HET Green to Red hour IS WAS Green to Red Minute<br>
+HOURLYCOLOUR = 1; Every hour other colour text. HET Green to Red hour IS WAS Green to Red Minute <br>
+WHITECOLOR = 2; All white text <br>
+OWNCOLOUR = 3; All own colour<br>
+OWNHETISCLR = 4; All own colour. HET Green to Red hour IS WAS Green to Red Minute <br>
+WHEELCOLOR = 5; Every second another colour of rainbow<br>
+DIGITAL = 6; Digital display </p>
 ************************************************************************************
 Changes.: 0.24 Built in Clock Michelle en JoDi klok. <br>
 Changes.: 0.25 0.26 Optimised and ready for SK6812 RGBW<br>
