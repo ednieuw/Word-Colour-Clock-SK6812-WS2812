@@ -9,17 +9,17 @@ This source contains code for the following modules:
 - LCD
 - WIFI on MKR 1010 to get NTP time
 
-Load and install in IDE:
-http://arduino.esp8266.com/stable/package_esp8266com_index.json  (ESP-12)
-https://mcudude.github.io/MightyCore/package_MCUdude_MightyCore_index.json ATMEGA1260 and 644
+Load and install in IDE:<br>
+http://arduino.esp8266.com/stable/package_esp8266com_index.json  (ESP-12)<br>
+https://mcudude.github.io/MightyCore/package_MCUdude_MightyCore_index.json ATMEGA1260 and 644<br>
 https://raw.githubusercontent.com/damellis/attiny/ide-1.6.x-boards-manager/package_damellis_attiny_index.json ATTINY
-Arduino SAMD for MKR1010
+Arduino SAMD for MKR1010<br>
 
 <p>This word clock program is suitable and tested for use with Arduino UNO, Nano, Nano Every, ATMEGA, ATMEGA1284 chip, Arduino MKR 1010. <br>
-  Other Arduino variant probably also work.<br>
-  The HC05 or HM-10 Bluetooth module is used to read and write information or instructions to the clock. <br>
-  With a rotary encoder time and several display modes can also be changed.<br>
-  The DCF77 module can be attached to adjust the time to the second with German longwave time signal received by the module Arduino Uno, Nano with WS2812 or SK6812 LEDs: <br>
+Other Arduino variant probably also work.<br>
+The HC05 or HM-10 Bluetooth module is used to read and write information or instructions to the clock. <br>
+With a rotary encoder time and several display modes can also be changed.<br>
+The DCF77 module can be attached to adjust the time to the second with German longwave time signal received by the module Arduino Uno, Nano with WS2812 or SK6812 LEDs: <br>
 Program size must stay below approx 23572 bytes  when 144 LEDs are used. Due to a Adafruit Neopixel bug the usage of memory by the LEDs is not subtracted from the avaiable memory. <br>
 With the Nano Every, Mega or chips with larger memory program size is no issue.<br>
 In an Arduino MKR1010 Wifi can be used to receive the time from a timeserver<br>
