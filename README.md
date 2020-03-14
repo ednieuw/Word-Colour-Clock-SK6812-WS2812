@@ -50,46 +50,32 @@ WHEELCOLOR    = 5; Every second another colour of rainbow
 DIGITAL       = 6; Digital display
 
 ************************************************************************************
- Author .: Ed Nieuwenhuys
- 
- Changes.: 0.25 0.26 Optimised and ready for SK6812 RGBW
- 
- Changes.: 0.27 Colour changes per minute. New Function HSVtoRGB
- 
- Changes.: 0.28b 144 LED EJN_SK6821 clock with Digits in display BLUETOOTH not possible bug with Softwareserial & Adafruit_neopixel. connect BT to pin 0 & 1
- 
- Changes.: 0.29 FAB_LED library added. Doet het redelijk. Kost meer global variabel space. Serial en BT werkt ook niet met Bluetooth enabled
- 
- Changes.: 0.30 Digits in matrix.
- 
- Changes.: 0.31 Bluetooth to pin 0 and 1. Removed software serial. Added EJN to defines
- 
- Changes.: 0.32 3D array in PROGMEM to avoid memory problem with NEOpixel library. 
- 
- Changes.: 0.33 Program size must stay below approx 23572, 1129 bytes with 144 LEDs. BLUETOOTH on pin 0 & 1, No software serial
-                Program compatible with ATMEGA 1284
-                
- Changes.: 0.34-c Added FR, DE en UK
- 
- Changes.: 0.35 Ready for testing in four languages clock.
- 
- Changes.: 0.36 Added MKR1010.  #if defined(ARDUINO_SAMD_MKRWIFI1010)
- 
- Changes.: 0.37 Added webserver for MKR1010
- 
- Changes.: 0.38 ATMEGA 1280 gave problems with Bluetooth. Solved by adding Softwareserial.h at the top.  Probably the double #ifdef
- 
- Changes.: 0.39 NB. Bluetooth with 1280 boards  on serial port pins  0 en 1 Softwareserial.h not needed anymore
- 
- Changes.: 0.39 DCF HIGH LOW in definition, introduced shorter #define ATmega644_1284
- 
- Changes.: 0.40 Repaired 'press rotary' to set time. Moved SetSecondColour() and SetMinuteColour() occurences to DisplayTime()
- 
- Changes.: 0.41 Stores chosen display mode in EEPROM. Reset function added.
- 
- Changes.: 0.42 Changed time settings in rotary one press change hour, 2 presses change minutes, then display choices and last light intensity
- 
- Changes.: 0.43 Stable version Removed HET IF WAS turning off in display. Store Own colour in EEPROM. Cleaned up code. Software for ATMEGA 1280 25cm Klok No36 en No37
- 
- Changes.: 0.44 #define WS2812 and #define SK6812 changed to #define LED2812 #define LED6812 remove WS1812 library and uses Adafruit_NeoPixel for both LED types
-                Zet_Pixel() changed
+Changes.: 0.24 Built in Clock Michelle en JoDi klok. <br>
+Changes.: 0.25 0.26 Optimised and ready for SK6812 RGBW<br>
+Changes.: 0.27 Colour changes per minute. New Function HSVtoRGB<br>
+Changes.: 0.28b 144 LED EJN_SK6821 clock with Digits in display BLUETOOTH not possible bug with Softwareserial &amp; Adafruit_neopixel. connect BT to pin 0 &amp; 1<br>
+Changes.: 0.29 FAB_LED library added. Doet het redelijk. Kost meer global variabel space. Serial en BT werkt ook niet met Bluetooth enabled<br>
+Changes.: 0.30 Digits in matrix.<br>
+Changes.: 0.31 Bluetooth to pin 0 and 1. Removed software serial. Added EJN to defines<br>
+Changes.: 0.32 3D array in PROGMEM to avoid memory problem with NEOpixel library. <br>
+Changes.: 0.33 Program size must stay below approx 23572, 1129 bytes with 144 LEDs. BLUETOOTH on pin 0 &amp; 1, No software serial<br>
+Program compatible with ATMEGA 1284<br>
+Changes.: 0.34-c Added FR, DE en UK<br>
+Changes.: 0.35 Ready for testing in four languages clock. <br>
+Changes.: 0.36 Added MKR1010. #if defined(ARDUINO_SAMD_MKRWIFI1010)<br>
+Changes.: 0.37 Added webserver for MKR1010<br>
+Changes.: 0.38 ATMEGA 1280 gave problems with Bluetooth. Solved by adding Softwareserial.h at the top. Probably the double #ifdef <br>
+Changes.: 0.39 NB. Bluetooth with 1280 boards on serial port pins 0 en 1 Softwareserial.h not needed anymore<br>
+Changes.: 0.39 DCF HIGH LOW in definition, introduced shorter #define ATmega644_1284<br>
+Changes.: 0.40 Repaired 'press rotary' to set time. Moved SetSecondColour() and SetMinuteColour() occurences to DisplayTime()<br>
+Changes.: 0.41 Stores chosen display mode in EEPROM. Reset function added. <br>
+Changes.: 0.42 Changed time settings in rotary one press change hour, 2 presses change minutes, then display choices and last light intensity<br>
+Changes.: 0.43 Stable version Removed HET IF WAS turning off in display. Store Own colour in EEPROM. Cleaned up code. Software for ATMEGA 1280 25cm Klok No36 en No37<br>
+Changes.: 0.44 #define WS2812 and #define SK6812 changed to #define LED2812 #define LED6812 remove WS1812 library and uses Adafruit_NeoPixel for both LED types<br>
+Zet_Pixel() aangepast<br>
+Changes.: 0.45 Adapted for WS2812 96LEDS Massaranduba clock No7<br>
+Changes.: 0.46 Removed DCF77 library and used own DCF77decoding. Receive DCF77 after turning off display of colour LEDs at night <br>
+Changes.: 0.47 Stripped down for use with WS2812 92 LEDs clock with Arduino Nano.<br>
+Changes.: 0.48 Maintenance<br>
+Changes.: 0.49 Changed variable name error: SumMinuteSignal --&gt;SumSecondSignal. Added &quot;A DCF Debug&quot; to menu<br>
+Changes.: 0.50 TinyDCF identical with improved code in DCF_HC12TransmitterV28
