@@ -37,7 +37,7 @@ OWNCOLOUR = 3; All own colour<br>
 OWNHETISCLR = 4; All own colour. HET Green to Red hour IS WAS Green to Red Minute <br>
 WHEELCOLOR = 5; Every second another colour of rainbow<br>
 DIGITAL = 6; Digital display </p>
-************************************************************************************
+************************************************************************************<br>
 Changes.: 0.24 Built in Clock Michelle en JoDi klok. <br>
 Changes.: 0.25 0.26 Optimised and ready for SK6812 RGBW<br>
 Changes.: 0.27 Colour changes per minute. New Function HSVtoRGB<br>
