@@ -1,12 +1,13 @@
-# Character Colour Clock WS2812/SK6812 ATMEGA 328/1284 MKR1010
-This Arduino code controls the ATMEGA328 (Nano) ATMEGA1284 chip and Arduino MKR1010 that controls the LED strips of the Word Clock
-This source contains code for the following modules:  
+# Character Word Colour Clock WS2812/SK6812 ATMEGA 328/1284 MKR1010
+This Arduino code is designed to run with the ATMEGA328 (Uno, Nano, Mini), ATMEGA1284 chip and Arduino MKR1010 and controls the LED strips of type SK6812 and WS2812 of the Word Clock
+This several versions of the source contains code for the following modules:  
 - RTC DS3231 ZS-042 clock module
 - KY-040 Keyes Rotary Encoder
 - LDR light sensor 5528
 - Bluetooth RF Transceiver Module HC05 and HM10 BLE
 - DCF77 module DCF-2
 - LCD
+- HC12 wireless Transceiver
 - WIFI on MKR 1010 to get NTP time
 
 Load and install in IDE:<br>
@@ -16,7 +17,7 @@ https://raw.githubusercontent.com/damellis/attiny/ide-1.6.x-boards-manager/packa
 Arduino SAMD for MKR1010<br>
 
 <p>This word clock program is suitable and tested for use with Arduino UNO, Nano, Nano Every, ATMEGA328, ATMEGA1284 chip, Arduino MKR 1010. <br>
-Other Arduino variant probably also work.<br>
+Other Arduino variants probably also work.<br>
 The HC05 or HM-10 Bluetooth module is used to read and write information or instructions to the clock. <br>
 With a rotary encoder time and several display modes can also be changed.<br>
 The DCF77 module can be attached to adjust the time to the second with German longwave time signal received by the module Arduino Uno, Nano with WS2812 or SK6812 LEDs: <br>
