@@ -38,6 +38,10 @@ OWNCOLOUR = 3; All own colour<br>
 OWNHETISCLR = 4; All own colour. HET Green to Red hour IS WAS Green to Red Minute <br>
 WHEELCOLOR = 5; Every second another colour of rainbow<br>
 DIGITAL = 6; Digital display </p>
+
+<img alt="PCB" src="Colour%20Word%20ClockPCBV14.jpg" width="450" /><br>
+PCB layout 
+
 ************************************************************************************<br>
 Changes.: 0.24 Built in Clock Michelle en JoDi klok. <br>
 Changes.: 0.25 0.26 Optimised and ready for SK6812 RGBW<br>
