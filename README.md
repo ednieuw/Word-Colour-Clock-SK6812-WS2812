@@ -74,10 +74,10 @@ Changes.: 0.46 Removed DCF77 library and used own DCF77decoding. Receive DCF77 a
 Changes.: 0.47 Stripped down for use with WS2812 92 LEDs clock with Arduino Nano.<br>
 Changes.: 0.48 Maintenance<br>
 Changes.: 0.49 Changed variable name error: SumMinuteSignal --&gt;SumSecondSignal. Added &quot;A DCF Debug&quot; to menu<br>
-Changes.: 0.50 TinyDCF identical with improved code in DCF_HC12TransmitterV28
-Changes.: 0.51 Added VERSION. Better 'installed mods' texts
-Changes.: 0.52 For wordclock No38 with 144 SK6812 LEDs. HC-12 transceiver module added
-Changes.: 0.53 Shortened filename. improved menu. Replaced DCF decoding. Identical with DCF77-NoIntV01.ino 
-Changes.: 0.54 Changed  if(DCF_signal>60 && abs((((Dyear*1  in if(DCFlocked && abs((((Dyear*12+Dmonth)*. Added every hour DCFlocked = false;
-                Identical to DCF77-NoIntV02c
-Changes.: 0.55 Stable in WS2812 96 LEDs Massaranduba clock No7. Optimized time decoding from DCF. Identical to DCF77-NoIntV03. 
+Changes.: 0.50 TinyDCF identical with improved code in DCF_HC12TransmitterV28<br>
+Changes.: 0.51 Added VERSION. Better 'installed mods' texts<br>
+Changes.: 0.52 For wordclock No38 with 144 SK6812 LEDs. HC-12 transceiver module added<br>
+Changes.: 0.53 Shortened filename. improved menu. Replaced DCF decoding. Identical with DCF77-NoIntV01.ino <br>
+Changes.: 0.54 Changed  if(DCF_signal>60 && abs((((Dyear*1  in if(DCFlocked && abs((((Dyear*12+Dmonth)*. 
+               Added every hour DCFlocked = false;  Identical to DCF77-NoIntV02c<br>
+Changes.: 0.55 Stable in WS2812 96 LEDs Massaranduba clock No7. Optimized time decoding from DCF. Identical to DCF77-NoIntV03. <br>
