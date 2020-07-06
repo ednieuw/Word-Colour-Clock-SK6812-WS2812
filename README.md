@@ -1,5 +1,8 @@
 # Character Word Colour Clock WS2812/SK6812 ATMEGA 328/1284 MKR1010
-This Arduino code is designed to run with the ATMEGA328 (Uno, Nano, Mini), ATMEGA1284 chip and Arduino MKR1010 and controls the LED strips of type SK6812 and WS2812 of the Word Clock.<br>
+This Arduino code up to version V024 is designed to run with the ATMEGA328 (Uno, Nano, Mini), <br>
+ATMEGA1284 chip and Arduino MKR1010 and controls the LED strips of type WS2812.
+Later versions uses more memory and are suited for SK6812 and WS2812 LED strips.<br>
+These versions were tested with the Arduino Nano Every and Arduino MKR1010 .<br>
 More about the construction see this page in Dutch:<br>
 https://ednieuw.home.xs4all.nl/Woordklok/Bouwpakket/WoordklokSK6812.htm
 
@@ -19,14 +22,12 @@ https://mcudude.github.io/MightyCore/package_MCUdude_MightyCore_index.json ATMEG
 https://raw.githubusercontent.com/damellis/attiny/ide-1.6.x-boards-manager/package_damellis_attiny_index.json ATTINY
 Arduino SAMD for MKR1010<br>
 
-<p>This word clock program is suitable and tested for use with Arduino UNO, Nano, Nano Every, ATMEGA328, ATMEGA1284 chip, Arduino MKR 1010. <br>
-Other Arduino variants probably also work.<br>
 The HC05 or HM-10 Bluetooth module is used to read and write information or instructions to the clock. <br>
 With a rotary encoder time and several display modes can also be changed.<br>
 The DCF77 module can be attached to adjust the time to the second with German longwave time signal received by the module Arduino Uno, Nano with WS2812 or SK6812 LEDs: <br>
 Program size must stay below approx 23572 bytes  when 144 LEDs are used. Due to a Adafruit Neopixel bug the usage of memory by the LEDs is not subtracted from the avaiable memory. <br>
 With the Nano Every, Mega or chips with larger memory program size is no issue.<br>
-In an Arduino MKR1010 Wifi can be used to receive the time from a timeserver<br>
+With an Arduino MKR1010, WIFI can be used to receive the time from a timeserver<br>
   <br>
   To set the time with the rotary button: <br>
   One press on rotary: UUR is flashing -&gt; turn to set hour.<br>
@@ -81,3 +82,4 @@ Changes.: 0.53 Shortened filename. improved menu. Replaced DCF decoding. Identic
 Changes.: 0.54 Changed  if(DCF_signal>60 && abs((((Dyear*1  in if(DCFlocked && abs((((Dyear*12+Dmonth)*. 
                Added every hour DCFlocked = false;  Identical to DCF77-NoIntV02c<br>
 Changes.: 0.55 Stable in WS2812 96 LEDs Massaranduba clock No7. Optimized time decoding from DCF. Identical to DCF77-NoIntV03. <br>
+Changes.: 0.56 SignalFaults=0 every hour. MinutesSinceStart > 0X0FFFFFF0   <br>    
