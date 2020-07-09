@@ -5,7 +5,8 @@ Later versions uses more memory and are suited for SK6812 and WS2812 LED strips.
 These versions were tested with the Arduino Nano Every and Arduino MKR1010 .<br>
 More about the construction see this page in Dutch:<br>
 https://ednieuw.home.xs4all.nl/Woordklok/Bouwpakket/WoordklokSK6812.htm
-
+<img alt="Two SK6812 clocks" src="TwoSK6812Clocks.jpg" width="450" /><br>
+ 
 The several versions of the source contains code for the following modules:  
 - RTC DS3231 ZS-042 clock module
 - KY-040 Keyes Rotary Encoder
