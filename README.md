@@ -1,4 +1,4 @@
-# Character Word Colour Clock WS2812/SK6812 ATMEGA 328/1284 MKR1010
+# Character Word Colour Clock<br> WS2812/SK6812, ATMEGA 328/1284, MKR1010, Nano Every
 This Arduino code up to version V024 is designed to run with the ATMEGA328 (Uno, Nano, Mini), <br>
 ATMEGA1284 chip and Arduino MKR1010 and controls the LED strips of type WS2812.
 Later versions uses more memory and are suited for SK6812 and WS2812 LED strips.<br>
