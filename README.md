@@ -79,7 +79,7 @@ Changes.: 0.50 TinyDCF identical with improved code in DCF_HC12TransmitterV28<br
 Changes.: 0.51 Added VERSION. Better 'installed mods' texts<br>
 Changes.: 0.52 For wordclock No38 with 144 SK6812 LEDs. HC-12 transceiver module added<br>
 Changes.: 0.53 Shortened filename. improved menu. Replaced DCF decoding. Identical with DCF77-NoIntV01.ino <br>
-Changes.: 0.54 Changed  if(DCF_signal>60 && abs((((Dyear*1  in if(DCFlocked && abs((((Dyear*12+Dmonth)*. 
-               Added every hour DCFlocked = false;  Identical to DCF77-NoIntV02c<br>
+Changes.: 0.54 Added every hour DCFlocked = false;  Identical to DCF77-NoIntV02c<br>
 Changes.: 0.55 Stable in WS2812 96 LEDs Massaranduba clock No7. Optimized time decoding from DCF. Identical to DCF77-NoIntV03. <br>
-Changes.: 0.56 SignalFaults=0 every hour. MinutesSinceStart > 0X0FFFFFF0   <br>    
+Changes.: 0.56 SignalFaults=0 every hour. MinutesSinceStart > 0X0FFFFFF0 <br>    
+Changes.: 0.57 Changed the DebugInfo line. Changed updating time when TimeOK = 1 and 2. Introduced use of Daylight saving flag BOnehourchange.<br>
