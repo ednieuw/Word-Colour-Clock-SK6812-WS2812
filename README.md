@@ -82,5 +82,19 @@ Changes.: 0.52 For wordclock No38 with 144 SK6812 LEDs. HC-12 transceiver module
 Changes.: 0.53 Shortened filename. improved menu. Replaced DCF decoding. Identical with DCF77-NoIntV01.ino <br>
 Changes.: 0.54 Added every hour DCFlocked = false;  Identical to DCF77-NoIntV02c<br>
 Changes.: 0.55 Stable in WS2812 96 LEDs Massaranduba clock No7. Optimized time decoding from DCF. Identical to DCF77-NoIntV03. <br>
-Changes.: 0.56 SignalFaults=0 every hour. MinutesSinceStart > 0X0FFFFFF0 <br>    
+Changes.: 0.56 SignalFaults=0 every hour. MinutesSinceStart > 0X0FFFFFF0.  <br>   
 Changes.: 0.57 Changed the DebugInfo line. Changed updating time when TimeOK = 1 and 2. Introduced use of Daylight saving flag BOnehourchange.<br>
+Changes.: 0.58 Made for 144 LEDs, rotary, DCF and Bluetooth SK6812<br>
+Changes.: 0.59 Added Thhmmss in menu. Removed Secpulse and simplified Brightness calculation. Cleaned coding. <br>
+                DCF77 and DCFtiny can be used seperately or together<br>
+Changes.: 0.60 Four languages clock. Werkende versie  New name --> Four-language Clock_V001<br>
+Changes.: 0.61 Corrected errors in English lay-out. Added colours as text instead of HEX. <br>
+                Serialcheck in Demomode() and Selftest(). Changed own color entry to Pwwrrggbb instead of Prrggbb<br>
+Changes.: 0.62 Counters for DCF Wrong times reported added. LedsOnOff added. sorage in Mem. EEPROM added <br>
+Changes.: 0.63 Removed SetMinuteColour() and CheckColourStatus() and fused them in SetSecondColour(). Optimized DCFtiny code TimeMinutesDiff <2 --> <10 <br>
+Changes.: 0.64 SIX->SIXUK Added EEPROM.put in setup  Added || Dday>31in pdateDCFclock<br>
+Changes.: 0.65 sizeof(menu) / sizeof(menu[0]). Added PrintLine sub routine<br>
+Changes.: 0.66 Minor changes<br>
+Changes.: 0.67 Copied ReworkInputString() from FibonacciKlok_V021. Optimised loop()  **** Version not tested !!!!<br>
+                Added KEYPADs. Changed rotary processing to combine it with the KEYPADs<br>
+Changes.: 0.68 Solved compiler warnings. Changed constrain(mem,0,250) -->= min(mem,250). Added in Reset() EEPROM.put(0,Mem);<br>
