@@ -1,13 +1,30 @@
-# Character Word Colour Clock<br> WS2812/SK6812, ATMEGA 328/1284, MKR1010, Nano Every
-This Arduino code up to version V024 is designed to run with the ATMEGA328 (Uno, Nano, Mini), <br>
-ATMEGA1284 chip and Arduino MKR1010 and controls the LED strips of type WS2812.
+# Character Word Colour Clock<br> WS2812/SK6812 for Arduino Nano Every, ATMEGA 328/1284 , MKR1010
+This software drives the display with RGB(W) LEDs for a word clock.<br>
+When using the SK6812 LEDs the display of the characters can also be pure white<br>
+The clock can be used for the languages Dutch, French, German and English.<br>
+For a four-languages word clock see here:<br> https://ednieuw.home.xs4all.nl/Woordklok/Bouwpakket/4LanguagesWordClock.htm <br>
+<br>The Arduino code version V024 is designed to run with the ATMEGA328 (Uno, Nano, Mini), <br>
+ATMEGA1284 chip and controls the LED strips of type WS2812.<br>
 Later versions uses more memory and are suited for SK6812 and WS2812 LED strips.<br>
-These versions were tested with the Arduino Nano Every and Arduino MKR1010 .<br>
-More about the construction see this page in Dutch:<br>
+The latest version is V070. This is free of compiler warnings and the code is optimized.<br>
+This version uses two methods to receive the DCF77 time. One is the DCF77 Arduino library that used interrupts.<br>
+The other samples over 25000 signals a second and is therefor lees prone for spikes in the signal.<br>
+But ... the code may not be delayed to much other processes. <br>
+Combining both methods results in a 50% improvement.<br>
+In the source one of both methods can be selected to be used. <br>
+<br>
+#define DCFMOD     // Use the Arduino DCF77 library with interrupts. <br> 
+#define DCFNOINT   // Use the Tiny DCF algorithm in this program.<br> 
+<br>
+More here: https://github.com/ednieuw/DCF77_NoInterrupt<br>
+
+More about the construction of the word clock see this page in Dutch:<br>
+The page is in Dutch but can be translated with Google translate. If needed mail me for a translation.<br>
+<br>
 https://ednieuw.home.xs4all.nl/Woordklok/Bouwpakket/WoordklokSK6812.htm
 <img alt="Two SK6812 clocks" src="TwoSK6812Clocks.jpg" width="450" /><br>
- 
-The several versions of the source contains code for the following modules:  
+
+The source contains code for the following modules:  
 - RTC DS3231 ZS-042 clock module
 - KY-040 Keyes Rotary Encoder
 - LDR light sensor 5528
@@ -15,20 +32,25 @@ The several versions of the source contains code for the following modules:
 - DCF77 module DCF-2
 - LCD
 - HC12 wireless transceiver
+- 4x3 and 3x1 Keypads
 - WIFI on MKR 1010 to get NTP time
 
-Load and install in IDE:<br>
-http://arduino.esp8266.com/stable/package_esp8266com_index.json  (ESP-12)<br>
-https://mcudude.github.io/MightyCore/package_MCUdude_MightyCore_index.json ATMEGA1260 and 644<br>
-https://raw.githubusercontent.com/damellis/attiny/ide-1.6.x-boards-manager/package_damellis_attiny_index.json ATTINY
-Arduino SAMD for MKR1010<br>
+For the ATMEGA1284 Load and install in IDE:<br>
+https://mcudude.github.io/MightyCore/package_MCUdude_MightyCore_index.json<br>
 
-The HC05 or HM-10 Bluetooth module is used to read and write information or instructions to the clock. <br>
+The HC05 or HM-10 Bluetooth module can be used used to read and write information or instructions to the clock with a IOS or android mobile phone.<br>
+To use it a serial terminal app must be installed.<br>
 With a rotary encoder time and several display modes can also be changed.<br>
-The DCF77 module can be attached to adjust the time to the second with German longwave time signal received by the module Arduino Uno, Nano with WS2812 or SK6812 LEDs: <br>
-Program size must stay below approx 23572 bytes  when 144 LEDs are used. Due to a Adafruit Neopixel bug the usage of memory by the LEDs is not subtracted from the avaiable memory. <br>
-With the Nano Every, Mega or chips with larger memory program size is no issue.<br>
-With an Arduino MKR1010, WIFI can be used to receive the time from a timeserver<br>
+The DCF77 module can be attached to adjust the time to the second with German longwave time signal.<br> 
+The signal is disturbed by the LEDs. <br>
+Turn off the LEDs during the night or place the receiver at least 10 cm away from the LEDs.<br>
+Also cheap power supplies, PC's, magnetrons and other high frequency apparatus can disturb the signal<br>
+
+<br>Note for Arduino Uno, Nano with WS2812 or SK6812 LEDs: <br>
+Program size with an Arduino UNO or Nano must stay below approx 23572 bytes when 144 LEDs are used. <br>
+Due to a Adafruit Neopixel bug the usage of memory by the LEDs is not subtracted from the avaiable memory.<br>
+With the Nano Every, Mega or chips with larger memory program size this is (still) no issue.<br>
+<br>With an Arduino MKR1010, WIFI can be used to receive the time from a timeserver<br>
   <br>
   To set the time with the rotary button: <br>
   One press on rotary: UUR is flashing -&gt; turn to set hour.<br>
@@ -95,6 +117,21 @@ Changes.: 0.63 Removed SetMinuteColour() and CheckColourStatus() and fused them 
 Changes.: 0.64 SIX->SIXUK Added EEPROM.put in setup  Added || Dday>31in pdateDCFclock<br>
 Changes.: 0.65 sizeof(menu) / sizeof(menu[0]). Added PrintLine sub routine<br>
 Changes.: 0.66 Minor changes<br>
-Changes.: 0.67 Copied ReworkInputString() from FibonacciKlok_V021. Optimised loop()  **** Version not tested !!!!<br>
-                Added KEYPADs. Changed rotary processing to combine it with the KEYPADs<br>
+Changes.: 0.67 Copied ReworkInputString() from FibonacciKlok_V021. Optimised loop() Version not tested !!!!<br>
+               Added KEYPADs. Changed rotary processing to combine it with the KEYPADs<br>
 Changes.: 0.68 Solved compiler warnings. Changed constrain(mem,0,250) -->= min(mem,250). Added in Reset() EEPROM.put(0,Mem);<br>
+Changes.: 0.69 Moved sprintf(sptext,"--> EdT:%ld Ed:%ld Th:%ld EdW:%ld ThW:%ld.... <br>
+                case  59:  if(MinOK && HourOK) TimeMinutes = Dhour * 60 + Dminute; else TimeMinutes++;<br>
+                if(Dminute>59) MinOK=0; Sometimes MinOK HourOK etc. parity was OK but the time was definitely wrong<br>
+                Corrected error BOnehourchange and COnehourchange at BitPos 16<br>
+                refined DCFNoInt with: if((millis() - DCFmsTick) >1010) break;<br>
+                Removed TimeOK=5<br>
+                Dsecond, ..., Dyear --> tmElements_t D time struct<br>
+                Isecond, ..., Iyear --> tmElements_t I time struct  V069.17<br>
+                Tekstprintln() changed coding<br>
+                Added two "One wire keypad" routines<br>
+                Added more fault dates control in DCFNoInt <br>
+                Made GetSecondsSince2000DCFNoInt() more robust when no signal is received<br>
+                Main source code comparable with Four-language_Clock_V004<br>
+                Added LIBSK6812 to be used instead of NEOPIXEL<br>
+Changes.: 0.70 Added self written SK6812 library EdSoft_SK6812.h<br>
