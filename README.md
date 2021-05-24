@@ -1,15 +1,25 @@
 # Character Word Colour Clock<br> WS2812/SK6812 for Arduino Nano Every, ATMEGA 328/1284 , MKR1010
 This software drives the display with RGB(W) LEDs for a word clock.<br>
 When using the SK6812 LEDs the display of the characters can also be pure white<br>
+The software makes intensive use of defines to select the several options and modules attached.<br>
+This makes the program very large. Remove the code between and #ifdef en #endif of things you do not use.<br>
+<br>
 The clock can be used for the languages Dutch, French, German and English.<br>
 For a four-languages word clock see here:<br> https://ednieuw.home.xs4all.nl/Woordklok/Bouwpakket/4LanguagesWordClock.htm <br>
-<br>The Arduino code version V024 is designed to run with the ATMEGA328 (Uno, Nano, Mini), <br>
-ATMEGA1284 chip and controls the LED strips of type WS2812.<br>
+<br>The Arduino code version Character_Clock_WS2812_Dec2020 is designed to run with the <br>
+ATMEGA328 (Uno, Nano, Mini), ATMEGA1284 chip and controls the LED strips of type WS2812.<br>
 Later versions uses more memory and are suited for SK6812 and WS2812 LED strips.<br>
+<br>
 The latest version is V070. This is free of compiler warnings and the code is optimized.<br>
-This version uses two methods to receive the DCF77 time. One is the DCF77 Arduino library that used interrupts.<br>
-The other samples over 25000 signals a second and is therefor lees prone for spikes in the signal.<br>
-But ... the code may not be delayed to much other processes. <br>
+Copy the libraries from librariesV070.zip in your libraries folder.<br>
+Compile and upload. Open the serial monitor or the terminal app on your phone<br> 
+![image](https://user-images.githubusercontent.com/12166816/119348087-aee38b00-bc9c-11eb-8c76-687d7cb20d97.png)
+<br><br>
+This version V070 uses two methods to receive the DCF77 time.<br>
+One is the DCF77 Arduino library that used interrupts.<br>
+The other samples over 25000 signals a second and is therefore less prone for spikes in the signal.<br>
+But ... the code may not be delayed to much by other processes.<br>
+In the source you can find methods keep delays to a minimum.<br>
 Combining both methods results in a 50% improvement.<br>
 In the source one of both methods can be selected to be used. <br>
 <br>
@@ -46,7 +56,7 @@ The signal is disturbed by the LEDs. <br>
 Turn off the LEDs during the night or place the receiver at least 10 cm away from the LEDs.<br>
 Also cheap power supplies, PC's, magnetrons and other high frequency apparatus can disturb the signal<br>
 
-<br>Note for Arduino Uno, Nano with WS2812 or SK6812 LEDs: <br>
+<br>Note for Character_Clock_WS2812_Dec2020 for Arduino Uno, Nano with WS2812 or SK6812 LEDs: <br>
 Program size with an Arduino UNO or Nano must stay below approx 23572 bytes when 144 LEDs are used. <br>
 Due to a Adafruit Neopixel bug the usage of memory by the LEDs is not subtracted from the avaiable memory.<br>
 With the Nano Every, Mega or chips with larger memory program size this is (still) no issue.<br>
