@@ -1,32 +1,42 @@
 # Character Word Colour Clock<br> WS2812/SK6812 for Arduino Nano Every, ATMEGA 328/1284 , MKR1010
 This software drives the display with RGB(W) LEDs for a word clock.<br>
-When using the SK6812 LEDs the display of the characters can also be pure white<br>
+When using the RGBW SK6812 LEDs the display of characters can show the whole spectrum of colours<b>
+but also pure white. With WS2812 RGB LEDs white has a shadows because it made by the combination of R, G en B.<br>
 The software makes intensive use of defines to select the several options and modules attached.<br>
-This makes the program very large. Remove the code between and #ifdef en #endif of things you do not use.<br>
+This makes the program very large. Remove the code between and #ifdef en #endif of parts you do not use.<br>
 <br>
 The clock can be used for the languages Dutch, French, German and English.<br>
-For a four-languages word clock see here:<br> https://ednieuw.home.xs4all.nl/Woordklok/Bouwpakket/4LanguagesWordClock.htm <br>
-<br>The Arduino code version Character_Clock_WS2812_Dec2020 is designed to run with the <br>
-ATMEGA328 (Uno, Nano, Mini), ATMEGA1284 chip and controls the LED strips of type WS2812.<br>
+For a four-languages word clock version see here:<br> https://ednieuw.home.xs4all.nl/Woordklok/Bouwpakket/4LanguagesWordClock.htm <br>
+<br>
+The Arduino code version Character_Clock_WS2812_Dec2020 is designed to run with the <br>
+ATMEGA328 (Uno, Nano, Mini), ATMEGA1284 chip and only controls the LED strips of type WS2812.<br>
 Later versions uses more memory and are suited for SK6812 and WS2812 LED strips.<br>
 <br>
-The latest version is V070. This is free of compiler warnings and the code is optimized.<br>
+The last version is V070. This is free of compiler warnings and the code is optimized.<br>
 Copy the libraries from librariesV070.zip in your libraries folder.<br>
-Compile and upload. Open the serial monitor or the terminal app on your phone<br> 
+Compile and upload. <br>
+Open the serial monitor or the terminal app on your phone when you have installed a Bluetooth module<br> 
 ![image](https://user-images.githubusercontent.com/12166816/119348087-aee38b00-bc9c-11eb-8c76-687d7cb20d97.png)
 <br><br>
-This version V070 uses two methods to receive the DCF77 time.<br>
-One is the DCF77 Arduino library that used interrupts.<br>
-The other samples over 25000 signals a second and is therefore less prone for spikes in the signal.<br>
+
+When a DCF77 module is attached time is adjusted to the second with a German longwave time signal.<br> 
+Version V070 uses two methods to receive the DCF77 time.<br>
+One method uses the DCF77 Arduino library that uses interrupts.<br>
+The other method samples over 25000 signals a second in the loop and is therefore less prone for spikes in the signal.<br>
 But ... the code may not be delayed to much by other processes.<br>
 In the source you can find methods keep delays to a minimum.<br>
-Combining both methods results in a 50% improvement.<br>
+Combining both methods results in a 50% improvement of the received time.<br>
 In the source one of both methods can be selected to be used. <br>
 <br>
 #define DCFMOD     // Use the Arduino DCF77 library with interrupts. <br> 
 #define DCFNOINT   // Use the Tiny DCF algorithm in this program.<br> 
 <br>
 More here: https://github.com/ednieuw/DCF77_NoInterrupt<br>
+The DCF77 signal is disturbed by the colour LEDs.<br>
+Turn off the LEDs during the night or place the receiver at least 10 cm away from the LEDs.<br>
+Also cheap power supplies, PC's, magnetrons and other high frequency apparatus can disturb the signal.<br>
+If the signal falls away or is erratic, turn off all electrical devices and power supplies<br>
+and find the culprit.<br>
 
 More about the construction of the word clock see this page in Dutch:<br>
 The page is in Dutch but can be translated with Google translate. If needed mail me for a translation.<br>
@@ -48,13 +58,9 @@ The source contains code for the following modules:
 For the ATMEGA1284 Load and install in IDE:<br>
 https://mcudude.github.io/MightyCore/package_MCUdude_MightyCore_index.json<br>
 
-The HC05 or HM-10 Bluetooth module can be used used to read and write information or instructions to the clock with a IOS or android mobile phone.<br>
-To use it a serial terminal app must be installed.<br>
-With a rotary encoder time and several display modes can also be changed.<br>
-The DCF77 module can be attached to adjust the time to the second with German longwave time signal.<br> 
-The signal is disturbed by the LEDs. <br>
-Turn off the LEDs during the night or place the receiver at least 10 cm away from the LEDs.<br>
-Also cheap power supplies, PC's, magnetrons and other high frequency apparatus can disturb the signal<br>
+The HC05 or HM-10 Bluetooth module can be used  to read and write information or instructions to the clock with a IOS or android mobile phone.<br>
+To use it a serial terminal app must be installed on your phone.<br>
+With a rotary encoder time and several display modes can also be selected.<br>
 
 <br>Note for Character_Clock_WS2812_Dec2020 for Arduino Uno, Nano with WS2812 or SK6812 LEDs: <br>
 Program size with an Arduino UNO or Nano must stay below approx 23572 bytes when 144 LEDs are used. <br>
