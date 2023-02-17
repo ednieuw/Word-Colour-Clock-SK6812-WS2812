@@ -83,7 +83,7 @@ OWNHETISCLR = 4; All own colour. HET Green to Red hour IS WAS Green to Red Minut
 WHEELCOLOR = 5; Every second another colour of rainbow<br>
 DIGITAL = 6; Digital display </p>
 
-<img alt="PCB" src="Colour%20Word%20ClockPCBV15.jpg" width="450" /><br>
+<img alt="PCB" src="ColourWordClockPCBV15.jpg" width="450" /><br>
 PCB layout 
 
 ************************************************************************************<br>
