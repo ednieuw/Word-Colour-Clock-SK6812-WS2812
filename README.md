@@ -6,7 +6,7 @@ The software makes intensive use of defines to select the several options and mo
 This makes the program very large. Remove the code between and #ifdef en #endif of parts you do not use.<br>
 <br>
 The clock can be used for the languages Dutch, French, German and English.<br>
-For a four-languages word clock with Version V083 see here:<br> https://ednieuw.home.xs4all.nl/Woordklok/Bouwpakket/4LanguagesWordClock.htm <br>
+For a four-languages word clock  see here: https://github.com/ednieuw/FourLanguageClock<br>
 <br>
 The Arduino code version Character_Clock_WS2812_Dec2020 is designed to run with the <br>
 ATMEGA328 (Uno, Nano, Mini), ATMEGA1284 chip and only controls the LED strips of type WS2812.<br>
