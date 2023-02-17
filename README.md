@@ -6,21 +6,22 @@ The software makes intensive use of defines to select the several options and mo
 This makes the program very large. Remove the code between and #ifdef en #endif of parts you do not use.<br>
 <br>
 The clock can be used for the languages Dutch, French, German and English.<br>
-For a four-languages word clock version see here:<br> https://ednieuw.home.xs4all.nl/Woordklok/Bouwpakket/4LanguagesWordClock.htm <br>
+For a four-languages word clock with Version V083 see here:<br> https://ednieuw.home.xs4all.nl/Woordklok/Bouwpakket/4LanguagesWordClock.htm <br>
 <br>
 The Arduino code version Character_Clock_WS2812_Dec2020 is designed to run with the <br>
 ATMEGA328 (Uno, Nano, Mini), ATMEGA1284 chip and only controls the LED strips of type WS2812.<br>
 Later versions uses more memory and are suited for SK6812 and WS2812 LED strips.<br>
 <br>
-The last version is V070. This is free of compiler warnings and the code is optimized.<br>
-Copy the libraries from librariesV070.zip in your libraries folder.<br>
+The last version is V083. This is free of compiler warnings and the code is optimized.<br>
+Copy the libraries from librariesV083.zip in your libraries folder.<br>
+With DEFINES in the source code options can be turned On and Off. 
 Compile and upload. <br>
 Open the serial monitor or the terminal app on your phone when you have installed a Bluetooth module<br> 
 ![image](https://user-images.githubusercontent.com/12166816/119348087-aee38b00-bc9c-11eb-8c76-687d7cb20d97.png)
 <br><br>
 
 When a DCF77 module is attached time is adjusted to the second with a German longwave time signal.<br> 
-Version V070 uses two methods to receive the DCF77 time.<br>
+Version V070 and higher uses two methods to receive the DCF77 time.<br>
 One method uses the DCF77 Arduino library that uses interrupts.<br>
 The other method samples over 25000 signals a second in the loop and is therefore less prone for spikes in the signal.<br>
 But ... the code may not be delayed to much by other processes.<br>
@@ -33,7 +34,7 @@ In the source one of both methods can be selected to be used. <br>
 <br>
 More here: https://github.com/ednieuw/DCF77_NoInterrupt<br>
 The DCF77 signal is disturbed by the colour LEDs.<br>
-Turn off the LEDs during the night or place the receiver at least 10 cm away from the LEDs.<br>
+Turn off the power to the LEDs during the night or place the receiver at least 10 cm away from the LEDs.<br>
 Also cheap power supplies, PC's, magnetrons and other high frequency apparatus can disturb the signal.<br>
 If the signal falls away or is erratic, turn off all electrical devices and power supplies<br>
 and find the culprit.<br>
@@ -58,7 +59,7 @@ The source contains code for the following modules:
 For the ATMEGA1284 Load and install in IDE:<br>
 https://mcudude.github.io/MightyCore/package_MCUdude_MightyCore_index.json<br>
 
-The HC05 or HM-10 Bluetooth module can be used  to read and write information or instructions to the clock with a IOS or android mobile phone.<br>
+The HC05, HM-10 (CC254x) and nRF52 Bluetooth modules can be used  to read and write information or instructions to the clock with a IOS or android mobile phone.<br>
 To use it a serial terminal app must be installed on your phone.<br>
 With a rotary encoder time and several display modes can also be selected.<br>
 
@@ -82,7 +83,7 @@ OWNHETISCLR = 4; All own colour. HET Green to Red hour IS WAS Green to Red Minut
 WHEELCOLOR = 5; Every second another colour of rainbow<br>
 DIGITAL = 6; Digital display </p>
 
-<img alt="PCB" src="Colour%20Word%20ClockPCBV14.jpg" width="450" /><br>
+<img alt="PCB" src="Colour%20Word%20ClockPCBV15.jpg" width="450" /><br>
 PCB layout 
 
 ************************************************************************************<br>
@@ -151,3 +152,21 @@ Changes.: 0.69 Moved sprintf(sptext,"--> EdT:%ld Ed:%ld Th:%ld EdW:%ld ThW:%ld..
                 Main source code comparable with Four-language_Clock_V004<br>
                 Added LIBSK6812 to be used instead of NEOPIXEL<br>
 Changes.: 0.70 Added self written SK6812 library EdSoft_SK6812.h<br>
+Changes: 0.71 Renamed DCFMOD -> DCFTH <br>
+Changes: 0.72 Added HT16K33tijd 4-digit display <br>
+               Optimized for Arduino Nano Every<br>
+Changes: 0.73 RP2040 #if defined(ARDUINO_ARCH_RP2040). <br>
+Changes: 0.74 BluetoothSerial function identical with Fibonacciklok_V036<br>
+Changes: 0.75 Added MAXBRIGHTNESS and Mem.UpperBrightness to regulate maximum luminosity. Changed MAXBRIGHTNESS to SLOPEBRIGHTNESS<br>
+               Mem.LightReducer is the slope.<br>
+Changes: 0.76 Checked and corrected DCF77 functionality  <br>
+Changes: 0.77 Version fitted for 4-language clock<br>
+Changes: 0.78 Renamed SetSecondColour() in SetMinuteColour()<br>
+Changes: V079 Added Mem.Checksum in EEPROM storage. Bug resoved in void ProcessKeyPressTurn --> if (encoderPos == 0) <br>
+Changes: V080 Changing source code to be suitable for RP2040.  Added DCF_counts. Added in setup() while (Serial.available())  Serial.read();  <br>                                                // Flush the serial input buffer. When a Bluetooth module is connected to RX/TX pin 0&1 garbage can set the time to 00:00:00<br>
+Changes: V081 Added nRF52 BLE protocol. <br>
+               Added several ARCHitectures   #if defined(__AVR_ATmega328P__) || defined(ARDUINO_ARCH_RP2040) || defined (ARDUINO_AVR_NANO_EVERY)|| defined<br> (ARDUINO_AVR_ATmega4809) || defined(ARDUINO_ARCH_SAMD)<br>
+               Added WIFIMOD and remove MKR1010 defines<br>
+Changes: V082  Bugs in menu corrected. Deze versie compileert niet meer goed.<br>  
+Changes: V083 Used for 4-language clock No1 with Nano Every and compiled with MegaCore X, ATMega4809, JTAG2UDPI<br>
+              Updated menu. Added toggle On/Off LEDs <br>
