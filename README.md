@@ -12,9 +12,9 @@ The Arduino code version Character_Clock_WS2812_Dec2020 is designed to run with 
 ATMEGA328 (Uno, Nano, Mini), ATMEGA1284 chip and only controls the LED strips of type WS2812.<br>
 Later versions uses more memory and are suited for SK6812 and WS2812 LED strips.<br>
 <br>
-The last version is V083. This is free of compiler warnings and the code is optimized.<br>
-Copy the libraries from librariesV083.zip in your libraries folder.<br>
-With DEFINES in the source code options can be turned On and Off. 
+The last version is V084. This is free of compiler warnings and the code is optimized.<br>
+Copy the libraries from librariesV083.zip in your libraries folder or install the necessary ones in the IDE by yourself.<br>
+With DEFINES in the source code options can be turned On and Off. <br>
 Compile and upload. <br>
 Open the serial monitor or the terminal app on your phone when you have installed a Bluetooth module<br> 
 ![image](https://user-images.githubusercontent.com/12166816/119348087-aee38b00-bc9c-11eb-8c76-687d7cb20d97.png)
