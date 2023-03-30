@@ -1,4 +1,5 @@
-# Character Word Colour Clock<br> WS2812/SK6812 for Arduino Nano Every, ATMEGA 328/1284 , MKR1010
+# Character Word Colour Clock<br> WS2812/SK6812 for Arduino Nano Every, ATMEGA 328/1284, MKR1010
+<img alt="Two SK6812 clocks" src="TwoSK6812Clocks.jpg" width="450" /><br>
 This software drives the display with RGB(W) LEDs for a word clock.<br>
 When using the RGBW SK6812 LEDs the display of characters can show the whole spectrum of colours<br>
 but also pure white. With WS2812 RGB LEDs white has a shadows because it made by the combination of R, G en B.<br> 
