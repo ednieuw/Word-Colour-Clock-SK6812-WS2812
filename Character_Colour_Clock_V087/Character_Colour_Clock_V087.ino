@@ -51,7 +51,7 @@ Changes: V085 DimLeds() between 0 and 1023 indtead of betwen 0 and 255
 Changes: V086 DCF defines corrected to compile without errors
               Corrected bug in colouring seconds and flickering between minutes
               Cleaned up code. Removed DCFNointerrupt
-Changes: V087 In Eikenklok No36 en No37. DCF and HT16K33 working. MKR1010 soso, WIFI fails. use newer version
+Changes: V087 In Eikenklok No36 en No37. DCF and HT16K33 working. MKR1010 soso, WIFI fails. use newer version.Added Displaytime() in Every Day update
  
               
 add in Additional boards URL
@@ -959,8 +959,9 @@ void EveryDayUpdate(void)
     Previous_LDR_read = analogRead(PhotoCellPin);                                             // to have a start value
     MinPhotocell      = Previous_LDR_read;                                                    // Stores minimum reading of photocell;
     MaxPhotocell      = Previous_LDR_read;                                                    // Stores maximum reading of photocell;
-    EEPROM.put(0,Mem);                                                                      // This function uses EEPROM.update() to perform the write, so does not rewrites the value if it didn't change
+    EEPROM.put(0,Mem);                                                                        // This function uses EEPROM.update() to perform the write, so does not rewrites the value if it didn't change
    }
+ Displaytime();                                                                               // Needed for HET IS MIDDERNACHT en HET IS NOEN
 }
 
 //------------------------------------------------------------------------------
