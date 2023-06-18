@@ -14,7 +14,7 @@ ATMEGA328 (Uno, Nano, Mini), ATMEGA1284 chip and controls the LED strips of type
 Later versions uses more memory and are suited for SK6812 and WS2812 LED strips.<br>
 <br>
 The last version is V087. This is free of compiler warnings and the code is optimized.<br>
-Copy the libraries from librariesV083.zip in your libraries folder or install the necessary ones in the IDE by yourself.<br>
+Copy the libraries from librariesV087.zip (separate zip file) in your libraries folder or install the necessary ones in the IDE by yourself.<br>
 With DEFINES in the source code options can be turned On and Off. <br>
 Compile and upload. <br>
 Open the serial monitor or the terminal app on your phone when you have installed a Bluetooth module<br> 
