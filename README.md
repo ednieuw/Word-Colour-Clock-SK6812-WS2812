@@ -40,6 +40,8 @@ Also cheap power supplies, PC's, magnetrons and other high frequency apparatus c
 If the signal falls away or is erratic, turn off all electrical devices and power supplies<br>
 and find the culprit.<br>
 
+ a better alternative since 2024 is to add an ESP32 See: https://github.com/ednieuw/ESP32SerialNTP-BLE-Clock 
+
 More about the construction of the word clock see this page in Dutch:<br>
 The page is in Dutch but can be translated with Google translate. If needed mail me for a translation.<br>
 <br>
@@ -56,6 +58,9 @@ The source contains code for the following modules:
 - HC12 wireless transceiver
 - 4x3 and 3x1 Keypads
 - WIFI on MKR 1010 to get NTP time
+NEW
+- NTP time with an ESP32 https://github.com/ednieuw/ESP32SerialNTP-BLE-Clock
+
 
 For the ATMEGA1284 Load and install in IDE:<br>
 https://mcudude.github.io/MightyCore/package_MCUdude_MightyCore_index.json<br>
