@@ -13,7 +13,7 @@ The Arduino code version Character_Clock_WS2812_Dec2020 is designed to run with 
 ATMEGA328 (Uno, Nano, Mini), ATMEGA1284 chip and controls the LED strips of type WS2812.<br>
 Later versions uses more memory and are suited for SK6812 and WS2812 LED strips.<br>
 <br>
-The last version is V087. This is free of compiler warnings and the code is optimized.<br>
+The last version is V090. This is free of compiler warnings and the code is optimized.<br>
 Copy the libraries from librariesV087.zip (separate zip file) in your libraries folder or install the necessary ones in the IDE by yourself.<br>
 With DEFINES in the source code options can be turned On and Off. <br>
 Compile and upload. <br>
