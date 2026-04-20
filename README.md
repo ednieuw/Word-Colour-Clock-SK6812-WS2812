@@ -49,7 +49,7 @@ and find the culprit.<br>
 More about the construction of the word clock see this page in Dutch:<br>
 The page is in Dutch but can be translated with Google translate. If needed mail me for a translation.<br>
 <br>
-https://ednieuw.home.xs4all.nl/Woordklok/Bouwpakket/WoordklokSK6812.htm
+https://ednieuw.nl/Woordklok/Bouwpakket/WoordklokSK6812.htm
 <img alt="Two SK6812 clocks" src="TwoSK6812Clocks.jpg" width="450" /><br>
 
 The source contains code for the following modules:  
